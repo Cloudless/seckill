@@ -1,6 +1,7 @@
 package org.seckill.service;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.seckill.Dto.Exposer;
 import org.seckill.Dto.SeckillExecution;
 import org.seckill.entity.Seckill;
@@ -9,6 +10,8 @@ import org.seckill.exception.SeckillCloseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
@@ -17,6 +20,10 @@ import static org.junit.Assert.*;
 /**
  * Created by jiangcy on 2018/1/16.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+//告诉junit spring的配置文件
+@ContextConfiguration({"classpath:spring/spring-dao.xml",
+        "classpath:spring/spring-service.xml"})
 public class SeckillServiceTest {
 
     private final Logger logger= LoggerFactory.getLogger(this.getClass());
@@ -25,7 +32,7 @@ public class SeckillServiceTest {
     private SeckillService seckillService;
 
     @Test
-    public void getSeckillList() throws Exception {
+    public void testgetSeckillList() throws Exception {
         List<Seckill> seckills=seckillService.getSeckillList();
         System.out.println(seckills);
     }
