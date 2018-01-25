@@ -1,5 +1,8 @@
 package org.seckill.web;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 import org.seckill.service.SeckillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +34,7 @@ import java.util.List;
  */
 
 //@Controller 将Controller放入Spring容器之中
+@Api(value = "用户操作")
 @Controller
 @RequestMapping("/seckill")     //url:/模块/资源/{id}/细分 eg: /seckill/list
 public class SeckillController {
@@ -39,7 +43,10 @@ public class SeckillController {
 
     @Autowired
     private SeckillService seckillService;
+    //获取列表页
 
+    @ApiOperation(value = "获取列表页")
+    @ApiParam(name ="参数名称", value ="参数具体描述")
     //获取列表页
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {

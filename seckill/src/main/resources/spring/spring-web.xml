@@ -34,7 +34,36 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />-->
+        <!--<property name="prefix" value="/WEB-INF/swagger/" />-->
+        <!--<property name="suffix" value="/swagger/**" />-->
+    <!--</bean>-->
+
     <!-- 扫描web相关的bean -->
     <context:component-scan base-package="org.seckill.web" />
+
+
+    <!-- 将 springSwaggerConfig加载到spring容器 -->
+    <bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
+    <!-- 将自定义的swagger配置类加载到spring容器 -->
+    <bean class="org.seckill.config.SwaggerConfig" />
+
+    <!--<mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>-->
+    <!--<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>-->
+
+    <mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger/"/>
+
+    <!-- 定义无需Controller的url<->view直接映射 -->
+    <mvc:view-controller path="/" view-name="../WEB-INF/swagger/index"/>
+
+
+    <!--&lt;!&ndash; 对静态资源文件的访问  方案一 （二选一） &ndash;&gt;-->
+    <!--<mvc:default-servlet-handler/>-->
+
+    <!-- 对静态资源文件的访问  方案二 （二选一）-->
+    <!--<mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/>-->
+    <!--<mvc:resources mapping="/js/**" location="/WEB-INF/static/js/" cache-period="31556926"/>-->
+    <!--<mvc:resources mapping="/css/**" location="/WEB-INF/static/css/" cache-period="31556926"/>-->
 
 </beans>
